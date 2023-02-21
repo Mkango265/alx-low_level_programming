@@ -12,10 +12,12 @@ int main(void)
 	while (n <= 122)
 	{
 		putchar(n);
+		n++;
 	}
 	while (a <= 90)
 	{
 		putchar(a);
+		a++;
 	}
 	putchar('\n');
 	return (0);
