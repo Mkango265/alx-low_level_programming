@@ -1,46 +1,91 @@
 #include "main.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 /**
- * *_realloc -Rreallocates a memory block using malloc and free
- *
- * @ptr: void pointer
- *
- * @old_size: unsigned int
- *
- * @new_size: unsigned int
- *
- *  Return: void
+ * _puts - prints a string, followed by a new line,
+ * @str: pointer to the string to print
+ * Return: void
+*/
+
+
+void _puts(char *str)
+{
+int i = 0;
+while (str[i])
+{
+	_putchar(str[i]);
+	i++;
+}
+
+}
+
+/**
+ * _atoi - convert a string to an integer.
+ * @s: char type string
+ * Return: integer converted
  */
 
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+int _atoi(const char *s)
 {
-	char *str;
+	int sign = 1;
+	unsigned long int resp = 0, firstNum, i;
 
-	if (new_size > old_size)
+	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
 	{
-		str = malloc(new_size);
-		free(ptr);
-		return (str);
+		if (s[firstNum] == '-')
+		{
+			sign *= -1;
+		}
 	}
 
-	if (new_size == old_size)
+	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
 	{
-		return (ptr);
+		resp *= 10;
+		resp += (s[i] - 48);
 	}
 
-	if (ptr == NULL)
-	{
-		str = malloc(new_size);
-		free(ptr);
-		return (str);
-	}
+	return (sign * resp);
+}
 
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	return (ptr);
+/**
+ * print_int - prints an integer.
+ * @n: int
+ * Return: 0
+ */
+
+void print_int(unsigned long int n)
+{
+
+unsigned  long int divisor = 1, i, resp;
+
+for (i = 0; n / divisor > 9; i++, divisor *= 10)
+;
+
+for (; divisor >= 1; n %= divisor, divisor /= 10)
+{
+	resp = n / divisor;
+	_putchar('0' + resp);
+}
+
+}
+
+/**
+ * main - print the result of the multiplication, followed by a new line
+ * @argc: int
+ * @argv: list
+ * Return: 0
+ */
+
+int main(int argc, char const *argv[])
+{
+(void)argc;
+
+if (argc != 3)
+{
+	_puts("Error ");
+	exit(98);
+}
+print_int(_atoi(argv[1]) * _atoi(argv[2]));
+_putchar('\n');
+
+return (0);
 }
