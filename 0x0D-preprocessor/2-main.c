@@ -1,7 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
-    printf("This program was compiled from the file: %s\n", __FILE__);
+int main(void)
+{
+    printf("%s\n", __FILE__);
     return 0;
 }
 
